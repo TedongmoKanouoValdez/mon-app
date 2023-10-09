@@ -1,0 +1,81 @@
+<div class="container">
+
+  <!-- condition pour afficherle titre lorsque la long de la chaine est > 0 -->
+  <h2 *ngIf="hotels && hotels.length >0"> {{title}}</h2>
+
+  <!-- afficher resultat au click -->
+  <button class="btn btn-primary d-flex" (click)="toggleIsNewBagde()">
+    <!-- mettre les icones -->
+    <span class="material-icons ml-4">
+      {{showBadge ? 'visibility_off' : 'visibility'}}
+    </span>
+    <!-- pour cacher le resultat -->
+    <span class="ml-4">
+      {{showBadge ? 'caché' : 'afficher'}} nouveau
+    </span>
+
+  </button>
+
+  <hr>
+
+  <!-- permet de faire la recherche et filtrer les donnees -->
+  <div class="my-2">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="filter">Filtre actuel: </span>
+        <!-- on appele la variable filtre qui a ete declare pour afficher -->
+        <b>{{ hotelFilter }}</b>
+      </div>
+      <div class="col-md-8 form-group">
+        <!-- pour voir le mot et filtrer en faisant un evenement -->
+        <input type="text" class="form-control" [(ngModel)]="hotelFilter">
+        <!-- <input type="text" class="form-control" [ngModel]="hotelFilter" (ngModelChange)="hotelFilter = $event "> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- //afficher la note sous forme de boite de dialogue -->
+  <div class="alert alert-primary" *ngIf="!!receiveRating">
+    {{receiveRating}}
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 pt-2">
+    <!-- permet de parcourir la liste des hotels en filtrant avec le nom -->
+    <div class="col" *ngFor="let hotel of filteredHotels ">
+      <div class="card">
+        <!-- afficher l'image et le titre en survol -->
+        <img [src]="hotel.imageUrl" [title]="hotel.hotelName | uppercase " class="card-img-top"
+          [alt]="hotel.hotelName" />
+        <div class="card-body">
+          <h5 class="card-title">{{hotel.hotelName | uppercase }}</h5>
+          <p class="card-text">{{hotel.description}}</p>
+
+          <!--le pipe comment utiliser le prix la devise type de monnaie avec son symbole le nombre de chiffre et la langue -->
+          <p class="card-text">
+            {{ hotel.price | currency : "EUR" : "symbol" : "1.2-2" : "fr"}}
+          </p>
+
+          <div class="d-flex justify-content-between align-items-baseline">
+
+            <!-- on appele le composant des etoiles et declenche l'evenement de la note -->
+            <app-star-rating [rating]="hotel.rating"
+              (starRatingClicked)="receiveRatingClicked($event)"></app-star-rating>
+
+              <!-- chemin pour les details de l'hotel à travers son id -->
+            <span class="material-icons bg-info text-align p-2 rounded-circle btn"
+              [routerLink]="['/hotels', hotel.hotelId]">
+
+              <!-- l'icone pour la fleche -->
+              keyboard_arrow_right
+            </span>
+          </div>
+
+          <!-- pour afficher le badge -->
+          <span class="badge badge-pill bg-info" *ngIf="showBadge">
+            Nouveau
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

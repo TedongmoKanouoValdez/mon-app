@@ -1,0 +1,34 @@
+[
+  {
+    "hotelId": 1,
+    "hotelName": "Paris swwet life",
+    "description": "belle vue au bord de la mere",
+    "price": 203.5,
+    "imageUrl": "assets/img/th.jfif",
+    "rating":3.5
+  },
+  {
+      "hotelId": 2,
+      "hotelName": "Italie life",
+      "description": "belle vue au bord de la mere",
+      "price": 203.5,
+      "imageUrl": "assets/img/th.jfif",
+      "rating":5
+  },
+  {
+    "hotelId": 3,
+    "hotelName": "Belgique life",
+    "description": "belle vue au bord de la mere",
+    "price": 203.5,
+    "imageUrl": "assets/img/th.jfif",
+    "rating":4
+  },
+  {
+    "hotelId": 4,
+  "hotelName": "France life",
+  "description": "belle vue au bord de la mere",
+  "price": 203.5,
+  "imageUrl": "assets/img/th.jfif",
+  "rating":2.5
+  }
+]
